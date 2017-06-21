@@ -1,0 +1,80 @@
+.card {
+    width: 150px;
+    height: 150px;
+    display: block;
+    float: left;
+    margin: 3px;
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+#board {
+    width: 640px;
+    height: 640px;
+    padding: 5px;
+    float: left;
+}
+
+#panel {
+    padding: 10px 0 0 15px;
+    width: 100%;
+    float: left;
+    font-family: Verdana;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+#overlay {
+    visibility: hidden;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+
+#winbanner {
+    padding-top: 220px;
+    border: none;
+}
+
+#winbanner.visible {
+    visibility: visible;
+}
+
+#cardTemplate {
+    display:none;
+}
+
+.color0{
+    background-color:gray;
+}
+.color1{
+    background-color:brown;
+}
+.color2{
+    background-color:purple;
+}
+.color3{
+    background-color:orange;
+}
+.color4{
+    background-color:red;
+}
+.color5{
+    background-color:yellow;
+}
+.color6{
+    background-color:blue;
+}
+.color7{
+    background-color:green;
+}
+
+

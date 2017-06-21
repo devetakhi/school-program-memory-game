@@ -1,6 +1,8 @@
-javascript-memory
+Javascript Memory
 =================
 
-Simple memory game in pure JavaScript.
+Simple memory game in pure JavaScript. 
+No dependencies, no nothing. Just HTML, CSS and pure JS.
 
-The charm of this project is that it's hosted in one file and doesn't require any external dependencies.
+Based on https://github.com/alexander-t/javascript-memory
+

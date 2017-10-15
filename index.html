@@ -16,59 +16,48 @@
 
 <script language="javascript">
                 
-        function Board() {
-
+        class Board {
+          
+          constructor(){
             this.moves = 0;
             this.clickedSquares = {first: null, second: null};
             this.squares = [];
+          }
 
-            this.init = function(numberOfSquares){
-
+            init(numberOfSquares){
+              
                 if (numberOfSquares % 2 == 1) numberOfSquares++;
-
-                var possibleColors = [];
-                for(var i=0, j=0; i<numberOfSquares; i+=2, j++){
+                let possibleColors = [];
+                for(let i=0, j=0; i<numberOfSquares; i+=2, j++){
                     possibleColors[i] = "color"+j;
                     possibleColors[i+1] = "color"+j;
                 }       
-
-                possibleColors.sort(function() { return 0.5 - Math.random() });      
-
-                for (var i = 0; i < numberOfSquares; i++) {
+                possibleColors.sort(() => { return 0.5 - Math.random() });      
+                for (let i = 0; i < numberOfSquares; i++) {
                     this.addCard(i, possibleColors[i]);
                 }
-
-            }
-
-            this.addCard = function(id, color){
-
-                var card = document.getElementById("cardTemplate").cloneNode(true);
-                card.id = id;
-                document.getElementById("board").appendChild(card);
-
-                this.squares.push(new Square(id, color));
-
             }
             
-            this.updateCounter = function(){
+            addCard(id, color){
+                let card = document.getElementById("cardTemplate").cloneNode(true);
+                card.id = id;
+                document.getElementById("board").appendChild(card);
+                this.squares.push(new Square(id, color));
+            }
+            
+            updateCounter(){
                 this.moves = this.moves + 1;
                 document.getElementById("moveCounter").innerHTML = this.moves;
-            };
-
-
-            this.selectSquare = function (id) {
-
+            }
+          
+            selectSquare(id) {
                 if (this.bothSquaresFlipped() && !this.squaresMatch()){
                     this.clearSquares(true);
                     return;
                 }
-
                 this.flipSquare(this.squares[id]);
-
                 if (this.bothSquaresFlipped()) {
-
                     this.updateCounter();
-
                     if (this.squaresMatch()) {
                         this.clearSquares(false);
                         if (this.checkAllFlipped()){
@@ -77,12 +66,10 @@
                     }
                 }
             }
-
-            this.flipSquare = function (square) {
+            flipSquare(square) {
                 if (square.flipped) return;
                 
                 square.flip();
-
                 if (this.clickedSquares.first == null) {
                     this.clickedSquares.first = square;
                 } else if (this.clickedSquares.first != null && this.clickedSquares.second == null) {
@@ -90,54 +77,46 @@
                 }
                 
             }
-
-            this.bothSquaresFlipped = function () {
+            bothSquaresFlipped() {
                 return this.clickedSquares.first != null && this.clickedSquares.second != null;
             }
-
-            this.squaresMatch = function () {
+            squaresMatch() {
                 return this.clickedSquares.first.color == this.clickedSquares.second.color;
             }
-
-            this.checkAllFlipped = function(){
-
+            checkAllFlipped(){
                 for (var i=0; i<this.squares.length; i++){
                     if (!this.squares[i].flipped) return false;
                 }
                 return true;
-
             }
-
-            this.clearSquares = function(shouldUnflipCards){
+            clearSquares(shouldUnflipCards){
                 if (shouldUnflipCards){
                     this.clickedSquares.first.unflip();
                     this.clickedSquares.second.unflip();
                 }
-
                 this.clickedSquares.first = this.clickedSquares.second = null;
                 
             }
         }
-
-        function Square(id, color) {
+        class Square {
+          
+          constructor(id, color){
             this.id = id;
             this.color = color;
             this.flipped = false;
-
-            this.unflip = function () {
-                document.getElementById(this.id).classList.remove(color);
+          }
+            
+            unflip() {
+                document.getElementById(this.id).classList.remove(this.color);
                 this.flipped = false;
             }
-
-            this.flip = function () {
-                document.getElementById(this.id).classList.add(color);
+            flip() {
+                document.getElementById(this.id).classList.add(this.color);
                 this.flipped = true;
             }
         }
-
         var board = new Board();
         board.init(10);
-
     </script>
 </body>
 </html>
